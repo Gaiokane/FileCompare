@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Configuration;
 using System.Data;
 using System.Drawing;
 using System.IO;
@@ -13,14 +12,14 @@ using System.Windows.Forms;
 
 namespace FileCompare
 {
-    public partial class FormMain : Form
+    public partial class UCTest : UserControl
     {
-        public FormMain()
+        public UCTest()
         {
             InitializeComponent();
         }
 
-        private void FormMain_Load(object sender, EventArgs e)
+        private void UCTest_Load(object sender, EventArgs e)
         {
             //配置文件读取默认配置
             DefaultConfigHelper.Init();
@@ -40,10 +39,6 @@ namespace FileCompare
             treeView1.CheckBoxes = true;
             treeView1.ShowLines = false;
             treeView1Refresh();
-
-            panel1.Controls.Clear();
-            UCTest uctest = new UCTest();
-            panel1.Controls.Add(uctest);
         }
 
         private void treeView1Refresh()
@@ -105,24 +100,6 @@ namespace FileCompare
         private void button4_Click(object sender, EventArgs e)
         {
             treeView1Refresh();
-        }
-
-        private void toolStripMenuItem1_Click(object sender, EventArgs e)
-        {
-            panel1.Controls.Clear();
-            UCTest uc = new UCTest();
-            //UCFileCompare uc = new UCFileCompare();
-            panel1.Controls.Add(uc);
-        }
-
-        private void 比对模板管理ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void 退出ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Application.Exit();
         }
     }
 }
