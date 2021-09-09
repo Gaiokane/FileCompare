@@ -105,16 +105,21 @@ namespace FileCompare
         private void button5_Click(object sender, EventArgs e)
         {
             string result = "";
+            string eachLine = "";
             List<string> tvchecked = new List<string>();
+            List<string> fileResult = new List<string>();
             int no;
             //根节点选中
             if (treeView1.Nodes[0].Checked == true)
             {
                 richTextBox1.Text = "";
                 no = 1;
+                fileResult.Clear();
                 foreach (var item in FileSystemEntriesHelper.GetFiles(textBox1.Text.Trim(), "^(?!\\.).*", -1, false))
                 {
-                    result += no++ + "行：" + item + "\r\n";
+                    eachLine = no++ + "行：" + item + "\r\n";
+                    result += eachLine;
+                    fileResult.Add(eachLine);
                 }
                 richTextBox1.Text = result;
 
@@ -141,6 +146,7 @@ namespace FileCompare
                 if (tvchecked.Count > 0)
                 {
                     no = 1;
+                    fileResult.Clear();
                     foreach (var item in tvchecked)
                     {
                         string directory = FileSystemEntriesHelper.GetFileSystemEntries(textBox1.Text.Trim(), item, -1, false)[0];
@@ -148,7 +154,9 @@ namespace FileCompare
                         //result += no++ + "行：" + directory + "\r\n";
                         foreach (var item1 in FileSystemEntriesHelper.GetFiles(directory, "^(?!\\.).*", -1, false))
                         {
-                            result += no++ + "行：" + item1 + "\r\n";
+                            eachLine = no++ + "行：" + item1 + "\r\n";
+                            result += eachLine;
+                            fileResult.Add(eachLine);
                         }
                         richTextBox1.Text = result;
                         //richTextBox1.Text += item + "\r\n";
@@ -177,6 +185,13 @@ namespace FileCompare
                 richTextBox1.Text += item+"\r\n";
             }
             */
+            richTextBox1.Text += "\r\n\r\n\r\n提取文件名：\r\n";
+            foreach (var item in fileResult)
+            {
+                //richTextBox1.Text += item;
+                string[] temp = item.Split('\\');
+                richTextBox1.Text += temp[temp.Length - 1];
+            }
         }
     }
 }
