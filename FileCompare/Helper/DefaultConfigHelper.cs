@@ -52,7 +52,8 @@ namespace FileCompare.Helper
             }
             if (string.IsNullOrEmpty(DefaultFloaderPath))
             {
-                AddappSettings("DefaultFloaderPath", @"E:\testfloader");
+                //AddappSettings("DefaultFloaderPath", @"E:\testfloader");
+                AddappSettings("DefaultFloaderPath", Environment.CurrentDirectory);
             }
         }
         #endregion

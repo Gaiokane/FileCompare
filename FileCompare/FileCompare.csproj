@@ -69,6 +69,12 @@
     <Compile Include="UCFileCompare.Designer.cs">
       <DependentUpon>UCFileCompare.cs</DependentUpon>
     </Compile>
+    <Compile Include="UCTempletesSetting.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UCTempletesSetting.Designer.cs">
+      <DependentUpon>UCTempletesSetting.cs</DependentUpon>
+    </Compile>
     <Compile Include="UCTest.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -89,6 +95,9 @@
     </Compile>
     <EmbeddedResource Include="UCFileCompare.resx">
       <DependentUpon>UCFileCompare.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UCTempletesSetting.resx">
+      <DependentUpon>UCTempletesSetting.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UCTest.resx">
       <DependentUpon>UCTest.cs</DependentUpon>

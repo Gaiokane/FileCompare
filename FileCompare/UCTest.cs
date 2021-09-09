@@ -28,7 +28,7 @@ namespace FileCompare
             //RichTextBox增加右键菜单
             RichTextBoxMenu richTextBoxMenu_richTextBox1 = new RichTextBoxMenu(richTextBox1);
 
-            string rootPath = System.Environment.CurrentDirectory;
+            string rootPath = Environment.CurrentDirectory;
             //MessageBox.Show(rootPath);
             FileStream templatesfile = File.Create(rootPath + "\\Templates");
             templatesfile.Close();
@@ -100,6 +100,82 @@ namespace FileCompare
         private void button4_Click(object sender, EventArgs e)
         {
             treeView1Refresh();
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            string result = "";
+            int no = 1;
+            List<string> tvchecked = new List<string>();
+            //根节点选中
+            if (treeView1.Nodes[0].Checked == true)
+            {
+                richTextBox1.Text = "";
+                no = 1;
+                foreach (var item in FileSystemEntriesHelper.GetFileSystemEntries(textBox1.Text.Trim(), "^(?!\\.).*", -1, false))
+                {
+                    result += no++ + "行：" + item + "\r\n";
+                }
+                richTextBox1.Text = result;
+
+                /*
+                foreach (var item in treeView1.Nodes[0].Nodes)
+                {
+                    tvchecked.Add(item.ToString());
+                }
+                */
+            }
+            //根节点未选中
+            else
+            {
+                result = "";
+                //遍历子节点
+                for (int i = 0; i < treeView1.Nodes[0].Nodes.Count; i++)
+                {
+                    //子节点有勾选添加到list
+                    if (treeView1.Nodes[0].Nodes[i].Checked == true)
+                    {
+                        tvchecked.Add(treeView1.Nodes[0].Nodes[i].Text);
+                    }
+                }
+                if (tvchecked.Count > 0)
+                {
+                    no = 1;
+                    foreach (var item in tvchecked)
+                    {
+                        string directory = FileSystemEntriesHelper.GetFileSystemEntries(textBox1.Text.Trim(), item, -1, false)[0];
+                        result += no++ + "行：" + directory + "\r\n";
+                        foreach (var item1 in FileSystemEntriesHelper.GetFileSystemEntries(directory, "^(?!\\.).*", -1, false))
+                        {
+                            result += no++ + "行：" + item1 + "\r\n";
+                        }
+                        richTextBox1.Text = result;
+                        //richTextBox1.Text += item + "\r\n";
+                    }
+                }
+                else
+                {
+                    richTextBox1.Text = "未勾选";
+                }
+            }
+            /*
+            string directory = FileSystemEntriesHelper.GetFileSystemEntries(textBox1.Text.Trim(), "ZAA_CP19005", -1, false)[0];
+            //string result = "";
+            //int no = 1;
+            foreach (var item in FileSystemEntriesHelper.GetFileSystemEntries(directory, "^(?!\\.).*", -1, false))
+            {
+                result += no++ + "行：" + item + "\r\n";
+            }
+            richTextBox1.Text = result;
+            */
+
+            /*
+            richTextBox1.Text = "";
+            foreach (var item in tvchecked)
+            {
+                richTextBox1.Text += item+"\r\n";
+            }
+            */
         }
     }
 }
