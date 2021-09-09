@@ -26,7 +26,7 @@ namespace FileCompare
             DefaultConfigSettingsFill();
 
             //RichTextBox增加右键菜单
-            RichTextBoxMenu richTextBoxMenu_richTextBox1 = new RichTextBoxMenu(richTextBox1);
+            _ = new RichTextBoxMenu(richTextBox1);
 
             string rootPath = Environment.CurrentDirectory;
             //MessageBox.Show(rootPath);
@@ -38,10 +38,10 @@ namespace FileCompare
 
             treeView1.CheckBoxes = true;
             treeView1.ShowLines = false;
-            treeView1Refresh();
+            TV1Refresh();
         }
 
-        private void treeView1Refresh()
+        private void TV1Refresh()
         {
             treeView1.Nodes.Clear();
             treeView1.Nodes.Add("全选");
@@ -99,14 +99,14 @@ namespace FileCompare
 
         private void button4_Click(object sender, EventArgs e)
         {
-            treeView1Refresh();
+            TV1Refresh();
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
             string result = "";
-            int no = 1;
             List<string> tvchecked = new List<string>();
+            int no;
             //根节点选中
             if (treeView1.Nodes[0].Checked == true)
             {

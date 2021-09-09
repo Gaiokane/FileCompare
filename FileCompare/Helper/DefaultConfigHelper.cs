@@ -198,7 +198,7 @@ namespace FileCompare.Helper
         /// <returns>appSettings值</returns>
         public static string GetappSettings(string key, string configpath = null)
         {
-            string result = "";
+            string result;
             if (configpath == null)
             {
                 result = RWConfig.GetappSettingsValue(key, CONFIGPATH);
@@ -220,7 +220,7 @@ namespace FileCompare.Helper
         public static string[] GetappSettingsSplitBySemicolon(string key, string configpath = null)
         {
             string[] result = { };
-            string values = "";
+            string values;
             if (configpath == null)
             {
                 values = RWConfig.GetappSettingsValue(key, CONFIGPATH);
