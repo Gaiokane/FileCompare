@@ -106,9 +106,9 @@ namespace FileCompare
             // 
             this.button5.Location = new System.Drawing.Point(496, 33);
             this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(109, 23);
+            this.button5.Size = new System.Drawing.Size(145, 23);
             this.button5.TabIndex = 20;
-            this.button5.Text = "遍历tv勾选文件夹";
+            this.button5.Text = "遍历tv勾选文件夹下文件";
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click);
             // 

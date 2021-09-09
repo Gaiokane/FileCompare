@@ -112,7 +112,7 @@ namespace FileCompare
             {
                 richTextBox1.Text = "";
                 no = 1;
-                foreach (var item in FileSystemEntriesHelper.GetFileSystemEntries(textBox1.Text.Trim(), "^(?!\\.).*", -1, false))
+                foreach (var item in FileSystemEntriesHelper.GetFiles(textBox1.Text.Trim(), "^(?!\\.).*", -1, false))
                 {
                     result += no++ + "行：" + item + "\r\n";
                 }
@@ -144,8 +144,9 @@ namespace FileCompare
                     foreach (var item in tvchecked)
                     {
                         string directory = FileSystemEntriesHelper.GetFileSystemEntries(textBox1.Text.Trim(), item, -1, false)[0];
-                        result += no++ + "行：" + directory + "\r\n";
-                        foreach (var item1 in FileSystemEntriesHelper.GetFileSystemEntries(directory, "^(?!\\.).*", -1, false))
+                        //需要展示目录不注释下面一行，补齐
+                        //result += no++ + "行：" + directory + "\r\n";
+                        foreach (var item1 in FileSystemEntriesHelper.GetFiles(directory, "^(?!\\.).*", -1, false))
                         {
                             result += no++ + "行：" + item1 + "\r\n";
                         }
