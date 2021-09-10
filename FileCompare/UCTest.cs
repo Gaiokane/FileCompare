@@ -22,7 +22,7 @@ namespace FileCompare
         private void UCTest_Load(object sender, EventArgs e)
         {
             //配置文件读取默认配置
-            DefaultConfigHelper.Init();
+            DefaultConfig.Init();
             DefaultConfigSettingsFill();
 
             //RichTextBox增加右键菜单
@@ -55,8 +55,8 @@ namespace FileCompare
 
         private void DefaultConfigSettingsFill()
         {
-            this.Text = DefaultConfigHelper.DefaultFormText;
-            textBox1.Text = DefaultConfigHelper.DefaultFloaderPath;
+            this.Text = DefaultConfig.DefaultFormText;
+            textBox1.Text = DefaultConfig.DefaultFloaderPath;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -105,7 +105,7 @@ namespace FileCompare
         private void button5_Click(object sender, EventArgs e)
         {
             string result = "";
-            string eachLine = "";
+            string eachLine;
             List<string> tvchecked = new List<string>();
             List<string> fileResult = new List<string>();
             int no;

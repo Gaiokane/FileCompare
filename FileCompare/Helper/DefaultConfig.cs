@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Gaiokane;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,13 +7,15 @@ using System.Threading.Tasks;
 
 namespace FileCompare.Helper
 {
-    class TemplatesConfig
+    class DefaultConfig
     {
         //窗体默认名称
-        public static string Templates;
+        public static string DefaultFormText;
+        //默认文件夹路径
+        public static string DefaultFloaderPath;
 
         //配置文件路径
-        public static string CONFIGPATH = "./Templates";
+        public static string CONFIGPATH = "./FileCompare.exe";
 
         #region 配置文件初始化，检查默认键是否有缺失，有则新增
         /// <summary>
@@ -32,7 +35,8 @@ namespace FileCompare.Helper
         /// </summary>
         public static void GetAllDefaultappSettings()
         {
-            Templates = ConfigHelper.GetappSettings("Templates", CONFIGPATH);
+            DefaultFormText = ConfigHelper.GetappSettings("DefaultFormText", CONFIGPATH);
+            DefaultFloaderPath = ConfigHelper.GetappSettings("DefaultFloaderPath", CONFIGPATH);
         }
         #endregion
 
@@ -42,9 +46,14 @@ namespace FileCompare.Helper
         /// </summary>
         public static void SetDefaultSettingsIfIsNullOrEmpty()
         {
-            if (string.IsNullOrEmpty(Templates))
+            if (string.IsNullOrEmpty(DefaultFormText))
             {
-                ConfigHelper.AddappSettings("Templates", @"Templates_1", CONFIGPATH);
+                ConfigHelper.AddappSettings("DefaultFormText", @"未配置窗体名称，可在配置文件中自定义", CONFIGPATH);
+            }
+            if (string.IsNullOrEmpty(DefaultFloaderPath))
+            {
+                //AddappSettings("DefaultFloaderPath", @"E:\testfloader");
+                ConfigHelper.AddappSettings("DefaultFloaderPath", Environment.CurrentDirectory, CONFIGPATH);
             }
         }
         #endregion

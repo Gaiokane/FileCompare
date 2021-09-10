@@ -23,7 +23,7 @@ namespace FileCompare
         private void FormMain_Load(object sender, EventArgs e)
         {
             //配置文件读取默认配置
-            DefaultConfigHelper.Init();
+            DefaultConfig.Init();
             DefaultConfigSettingsFill();
 
             panel1.Controls.Clear();
@@ -33,7 +33,7 @@ namespace FileCompare
 
         private void DefaultConfigSettingsFill()
         {
-            this.Text = DefaultConfigHelper.DefaultFormText;
+            this.Text = DefaultConfig.DefaultFormText;
         }
 
         private void 文件比对ToolStripMenuItem_Click(object sender, EventArgs e)

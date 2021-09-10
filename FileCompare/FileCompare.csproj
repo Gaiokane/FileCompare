@@ -56,7 +56,8 @@
     <Compile Include="FormMain.Designer.cs">
       <DependentUpon>FormMain.cs</DependentUpon>
     </Compile>
-    <Compile Include="Helper\DefaultConfigHelper.cs" />
+    <Compile Include="Helper\ConfigHelper.cs" />
+    <Compile Include="Helper\DefaultConfig.cs" />
     <Compile Include="Helper\FileSystemEntriesHelper.cs" />
     <Compile Include="Helper\RichTextBoxMenu.cs" />
     <Compile Include="Helper\TemplatesConfig.cs" />
