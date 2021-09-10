@@ -65,7 +65,12 @@ namespace FileCompare
             {
                 MessageBox.Show("暂无比对模板，无法进行删除操作");
             }
-            //下拉有数据
+            //下拉有数据但只有一条
+            else if (ComBoxTempletes.Items.Count == 1)
+            {
+                MessageBox.Show("无法删除全部比对模板，请至少保留一个模板");
+            }
+            //下拉有数据且大于1条
             else
             {
                 if (DialogResult.OK == MessageBox.Show("确认删除模板：" + ComBoxTempletes.SelectedItem.ToString() + "？", "确认删除？", MessageBoxButtons.OKCancel))
