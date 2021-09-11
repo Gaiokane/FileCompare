@@ -173,23 +173,26 @@ namespace FileCompare.Helper
             List<string> result = new List<string>();
             string values;
             values = RWConfig.GetappSettingsValue(key, configpath);
-            for (int i = 0; i < 2; i++)
+            if (string.IsNullOrEmpty(values))
             {
-                if (string.IsNullOrEmpty(values))
-                {
-
-                }
-                else
-                {
-                    result = values.Split(split).ToList();
-                    break;
-                }
+                return result;
             }
-            if (string.IsNullOrEmpty(result[result.Count - 1]))
+            else
             {
-                result.Remove(result[result.Count - 1]);
+                for (int i = 0; i < 2; i++)
+                {
+                    if (!string.IsNullOrEmpty(values))
+                    {
+                        result = values.Split(split).ToList();
+                        break;
+                    }
+                }
+                if (string.IsNullOrEmpty(result[result.Count - 1]))
+                {
+                    result.Remove(result[result.Count - 1]);
+                }
+                return result;
             }
-            return result;
         }
         #endregion
     }

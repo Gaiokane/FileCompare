@@ -32,10 +32,19 @@ namespace FileCompare
         }
         #endregion
 
+        #region 比对模板详情保存按钮
         private void BtnSave_Click(object sender, EventArgs e)
         {
-
+            if (TemplatesConfig.AddappSettings(ComBoxTempletes.SelectedItem.ToString(), RichTextBoxTempleteDetails.Text.Trim().Replace("\n", "")))
+            {
+                MessageBox.Show("保存成功");
+            }
+            else
+            {
+                MessageBox.Show("保存失败");
+            }
         }
+        #endregion
 
         #region 新增按钮
         private void BtnNew_Click(object sender, EventArgs e)
@@ -83,23 +92,87 @@ namespace FileCompare
         }
         #endregion
 
+        #region 新增/编辑模板保存按钮
         private void BtnNewEditSave_Click(object sender, EventArgs e)
         {
+            List<string> templates = TemplatesConfig.GetappSettingsSplitBySemicolon("Templates", ';');
+
             //新增
             if (NewOrEdit == 1)
             {
+                /*
+                 * 先查询所有模板名称
+                 * 比对是否有重复值
+                 * 无重复值则在原有值后累加新值
+                */
 
-                RefreshComBoxTempletes();
+                //输入项在现有比对模板中已存在
+                if (templates.Contains(TextBoxTempleteName.Text.Trim()))
+                {
+                    MessageBox.Show("已存在重名比对模板，请重新输入");
+                }
+                //不存在，能够新增
+                else
+                {
+                    templates.Add(TextBoxTempleteName.Text.Trim());
+                    if (TemplatesConfig.EditappSettings("Templates", string.Join(";", templates.ToArray())) && TemplatesConfig.AddappSettings(TextBoxTempleteName.Text.Trim(), ""))
+                    {
+                        MessageBox.Show("新增成功");
+                    }
+                    else
+                    {
+                        MessageBox.Show("新增失败");
+                    }
+                    RefreshComBoxTempletes();
+                }
             }
             //编辑
             else if (NewOrEdit == 2)
             {
+                /*
+                 * 先查询所有模板名称
+                 * 比对下拉框所选是否存在
+                 * 存在则删除原值，新增新值
+                 * 获取原值模板详情
+                 * 删除原值模板详情
+                 * 新增新值模板详情
+                */
 
-                RefreshComBoxTempletes();
+                //下拉框所选要编辑项在配置文件中不存在
+                if (!templates.Contains(ComBoxTempletes.SelectedItem.ToString()))
+                {
+                    MessageBox.Show("所选要编辑的比对模板在配置文件中不存在，请确认");
+                }
+                //配置文件中存在要编辑的值，能够编辑
+                else
+                {
+                    //修改比对模板配置
+                    templates.Remove(ComBoxTempletes.SelectedItem.ToString());
+                    templates.Add(TextBoxTempleteName.Text.Trim());
+                    if (TemplatesConfig.EditappSettings("Templates", string.Join(";", templates.ToArray())) && TemplatesConfig.AddappSettings(TextBoxTempleteName.Text.Trim(), ""))
+                    {
+                        //修改比对模板详情配置
+                        string temp = TemplatesConfig.GetappSettings(ComBoxTempletes.SelectedItem.ToString());
+                        if (TemplatesConfig.DelappSettings(ComBoxTempletes.SelectedItem.ToString()) && TemplatesConfig.AddappSettings(TextBoxTempleteName.Text.Trim(), temp))
+                        {
+                            MessageBox.Show("修改成功");
+                        }
+                        else
+                        {
+                            MessageBox.Show("修改失败");
+                        }
+                        RefreshComBoxTempletes();
+                    }
+                    else
+                    {
+                        MessageBox.Show("修改失败");
+                    }
+                }
             }
             SetControlState(2);
             ResetNewEditControlValue();
         }
+        #endregion
 
         #region 取消按钮
         private void BtnNewEditCancel_Click(object sender, EventArgs e)
@@ -125,6 +198,8 @@ namespace FileCompare
             ComBoxTempletes.Items.Clear();
             List<string> templates;
             templates = TemplatesConfig.GetappSettingsSplitBySemicolon("Templates", ';');
+            //将list中元素倒叙
+            templates.Reverse();
             foreach (var item in templates)
             {
                 ComBoxTempletes.Items.Add(item);
