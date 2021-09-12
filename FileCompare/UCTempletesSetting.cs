@@ -26,8 +26,13 @@ namespace FileCompare
         #region 窗体加载
         private void UCTempletesSetting_Load(object sender, EventArgs e)
         {
+            //RichTextBox增加右键菜单
+            _ = new RichTextBoxMenu(RichTextBoxTempleteDetails);
+            //比对模板下拉框修改样式
             ComBoxTempletes.DropDownStyle = ComboBoxStyle.DropDownList;
+            //新增/编辑模板group默认不显示
             GroupNewEdit.Visible = false;
+            //重新绑定比对模板下拉框数据
             RefreshComBoxTempletes();
         }
         #endregion
