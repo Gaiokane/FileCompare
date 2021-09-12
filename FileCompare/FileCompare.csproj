@@ -58,6 +58,7 @@
     </Compile>
     <Compile Include="Helper\ConfigHelper.cs" />
     <Compile Include="Helper\DefaultConfig.cs" />
+    <Compile Include="Helper\FileHelper.cs" />
     <Compile Include="Helper\FileSystemEntriesHelper.cs" />
     <Compile Include="Helper\RichTextBoxMenu.cs" />
     <Compile Include="Helper\TemplatesConfig.cs" />

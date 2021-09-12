@@ -39,8 +39,7 @@ namespace FileCompare
         private void 文件比对ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             panel1.Controls.Clear();
-            UCTest uc = new UCTest();
-            //UCFileCompare uc = new UCFileCompare();
+            UCFileCompare uc = new UCFileCompare();
             panel1.Controls.Add(uc);
         }
 
@@ -54,6 +53,13 @@ namespace FileCompare
         private void 退出ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Application.Exit();
+        }
+
+        private void 测试ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            panel1.Controls.Clear();
+            UCTest uc = new UCTest();
+            panel1.Controls.Add(uc);
         }
     }
 }

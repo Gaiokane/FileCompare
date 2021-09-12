@@ -34,6 +34,7 @@ namespace FileCompare
             this.比对模板管理ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.退出ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.测试ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -42,7 +43,8 @@ namespace FileCompare
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.文件比对ToolStripMenuItem,
             this.比对模板管理ToolStripMenuItem,
-            this.退出ToolStripMenuItem});
+            this.退出ToolStripMenuItem,
+            this.测试ToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(800, 25);
@@ -77,6 +79,13 @@ namespace FileCompare
             this.panel1.Size = new System.Drawing.Size(800, 422);
             this.panel1.TabIndex = 13;
             // 
+            // 测试ToolStripMenuItem
+            // 
+            this.测试ToolStripMenuItem.Name = "测试ToolStripMenuItem";
+            this.测试ToolStripMenuItem.Size = new System.Drawing.Size(44, 21);
+            this.测试ToolStripMenuItem.Text = "测试";
+            this.测试ToolStripMenuItem.Click += new System.EventHandler(this.测试ToolStripMenuItem_Click);
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -101,6 +110,7 @@ namespace FileCompare
         private System.Windows.Forms.ToolStripMenuItem 比对模板管理ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 退出ToolStripMenuItem;
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.ToolStripMenuItem 测试ToolStripMenuItem;
     }
 }
 

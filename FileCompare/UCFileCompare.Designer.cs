@@ -40,7 +40,7 @@ namespace FileCompare
             this.LabCompareResult = new System.Windows.Forms.Label();
             this.BtnCopyToClipboard = new System.Windows.Forms.Button();
             this.BtnSaveToFile = new System.Windows.Forms.Button();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.RichTextBoxCompareResult = new System.Windows.Forms.RichTextBox();
             this.SuspendLayout();
             // 
             // LabTempletes
@@ -59,6 +59,7 @@ namespace FileCompare
             this.ComBoxTempletes.Name = "ComBoxTempletes";
             this.ComBoxTempletes.Size = new System.Drawing.Size(121, 20);
             this.ComBoxTempletes.TabIndex = 2;
+            this.ComBoxTempletes.SelectedIndexChanged += new System.EventHandler(this.ComBoxTempletes_SelectedIndexChanged);
             // 
             // LabComparePath
             // 
@@ -84,6 +85,7 @@ namespace FileCompare
             this.BtnConfirmPath.TabIndex = 15;
             this.BtnConfirmPath.Text = "确认路径";
             this.BtnConfirmPath.UseVisualStyleBackColor = true;
+            this.BtnConfirmPath.Click += new System.EventHandler(this.BtnConfirmPath_Click);
             // 
             // BtnCompare
             // 
@@ -93,6 +95,7 @@ namespace FileCompare
             this.BtnCompare.TabIndex = 16;
             this.BtnCompare.Text = "开始比对";
             this.BtnCompare.UseVisualStyleBackColor = true;
+            this.BtnCompare.Click += new System.EventHandler(this.BtnCompare_Click);
             // 
             // LabCompareFolder
             // 
@@ -109,6 +112,7 @@ namespace FileCompare
             this.TVCompareFolder.Name = "TVCompareFolder";
             this.TVCompareFolder.Size = new System.Drawing.Size(190, 356);
             this.TVCompareFolder.TabIndex = 18;
+            this.TVCompareFolder.AfterCheck += new System.Windows.Forms.TreeViewEventHandler(this.TVCompareFolder_AfterCheck);
             // 
             // LabCompareResult
             // 
@@ -127,6 +131,7 @@ namespace FileCompare
             this.BtnCopyToClipboard.TabIndex = 20;
             this.BtnCopyToClipboard.Text = "复制到剪切板";
             this.BtnCopyToClipboard.UseVisualStyleBackColor = true;
+            this.BtnCopyToClipboard.Click += new System.EventHandler(this.BtnCopyToClipboard_Click);
             // 
             // BtnSaveToFile
             // 
@@ -136,20 +141,21 @@ namespace FileCompare
             this.BtnSaveToFile.TabIndex = 21;
             this.BtnSaveToFile.Text = "保存到文件";
             this.BtnSaveToFile.UseVisualStyleBackColor = true;
+            this.BtnSaveToFile.Click += new System.EventHandler(this.BtnSaveToFile_Click);
             // 
-            // richTextBox1
+            // RichTextBoxCompareResult
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(199, 63);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(598, 356);
-            this.richTextBox1.TabIndex = 22;
-            this.richTextBox1.Text = "";
+            this.RichTextBoxCompareResult.Location = new System.Drawing.Point(199, 63);
+            this.RichTextBoxCompareResult.Name = "RichTextBoxCompareResult";
+            this.RichTextBoxCompareResult.Size = new System.Drawing.Size(598, 356);
+            this.RichTextBoxCompareResult.TabIndex = 22;
+            this.RichTextBoxCompareResult.Text = "";
             // 
             // UCFileCompare
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.richTextBox1);
+            this.Controls.Add(this.RichTextBoxCompareResult);
             this.Controls.Add(this.BtnSaveToFile);
             this.Controls.Add(this.BtnCopyToClipboard);
             this.Controls.Add(this.LabCompareResult);
@@ -182,6 +188,6 @@ namespace FileCompare
         private System.Windows.Forms.Label LabCompareResult;
         private System.Windows.Forms.Button BtnCopyToClipboard;
         private System.Windows.Forms.Button BtnSaveToFile;
-        private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.RichTextBox RichTextBoxCompareResult;
     }
 }
