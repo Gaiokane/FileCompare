@@ -26,9 +26,20 @@ namespace FileCompare
             DefaultConfig.Init();
             DefaultConfigSettingsFill();
 
+            //模板配置文件相关初始化
+            string rootPath = Environment.CurrentDirectory;
+            FileStream templatesfile = File.Create(rootPath + "\\Templates");
+            templatesfile.Close();
+            TemplatesConfig.Init();
+
             panel1.Controls.Clear();
-            UCTest uctest = new UCTest();
-            panel1.Controls.Add(uctest);
+            //UCTest uc = new UCTest();
+            UCFileCompare uc = new UCFileCompare();
+            panel1.Controls.Add(uc);
+
+            测试ToolStripMenuItem.Visible = false;
+
+            this.Icon = Properties.Resources.ah2t5_ehkkx_001;
         }
 
         private void DefaultConfigSettingsFill()

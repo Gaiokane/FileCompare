@@ -48,7 +48,7 @@ namespace FileCompare.Helper
         {
             if (string.IsNullOrEmpty(DefaultFormText))
             {
-                ConfigHelper.AddappSettings("DefaultFormText", @"未配置窗体名称，可在配置文件中自定义", CONFIGPATH);
+                ConfigHelper.AddappSettings("DefaultFormText", @"文件比对", CONFIGPATH);
             }
             if (string.IsNullOrEmpty(DefaultFloaderPath))
             {

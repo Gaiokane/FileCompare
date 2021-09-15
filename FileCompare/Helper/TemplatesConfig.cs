@@ -45,7 +45,7 @@ namespace FileCompare.Helper
             if (string.IsNullOrEmpty(Templates))
             {
                 ConfigHelper.AddappSettings("Templates", @"示例模板", CONFIGPATH);
-                ConfigHelper.AddappSettings("示例模板", @"编号_%\01_aa库\01_bb区\03_cc\%_dd.xls%;编号_%\01_11库\01_22区\03_33\%_44.xls%;", CONFIGPATH);
+                ConfigHelper.AddappSettings("示例模板", @"01_aa库\01_bb区\03_cc\%_dd.xls%;编号_%\01_11库\01_22区\03_33\%_44.doc%;", CONFIGPATH);
             }
         }
         #endregion
