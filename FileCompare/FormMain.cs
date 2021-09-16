@@ -37,7 +37,8 @@ namespace FileCompare
             UCFileCompare uc = new UCFileCompare();
             panel1.Controls.Add(uc);
 
-            测试ToolStripMenuItem.Visible = false;
+            _ = DefaultConfig.ShowTest == "1" ? 测试ToolStripMenuItem.Visible = true : 测试ToolStripMenuItem.Visible = false;
+            //测试ToolStripMenuItem.Visible = false;
 
             this.Icon = Properties.Resources.ah2t5_ehkkx_001;
         }

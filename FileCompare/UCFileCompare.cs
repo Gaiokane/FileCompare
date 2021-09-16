@@ -40,6 +40,25 @@ namespace FileCompare
          * ZAA_111\01_开发库\01_文档区\03_系统测试\111_ST_系统测试报告.docx
          */
 
+
+
+
+        /*
+         * 代办：
+         * √1）文件夹名称含有+报错
+         * √2）tv双击打开对应文件夹（根节点不操作）
+         * 3）显示匹配所选模板的文件
+         * √4）文件比对改成直接正则去遍历文件
+         * √5）默认勾选上次勾选的比对目录
+         * 6）所要匹配文件存在模板路径子目录中（未按模板路径存放）比对成功的问题
+         * 7）模糊文件夹比对
+         * 
+         * 
+         */
+
+
+
+
         #region 变量
         //所选比对模板对应模板详情
         private string templateDetails = "";
@@ -75,6 +94,10 @@ namespace FileCompare
             TVCompareFolderRefresh();
 
             Control.CheckForIllegalCrossThreadCalls = false;
+
+            BtnShowMatchFiles.Visible = false;
+
+            //MessageBox.Show(HandleEscaping(@"—$—(—)—*—+—.—[—?—\—^—{—|—\\—") + "\r\n" + HandleEscaping("—$—(—)—*—+—.—[—?—\\—^—{—|—\\—"));
         }
         #endregion
 
@@ -117,11 +140,13 @@ namespace FileCompare
         private void GetFileCompareResult()
         {
             string result = "";
-            
+
             RichTextBoxCompareResult.Text = "";
 
             //所选模板详情中去掉结尾分号，%替换为正则模糊搜索
-            string str = templateDetails.Replace(";", "").Replace("%", "(?!%).*").Replace("\\", "\\\\");
+            //string str = templateDetails.Replace(";", "").Replace("%", "(?!%).*").Replace("\\", "\\\\");
+            //对正则特殊字符转义
+            string str = HandleEscaping(templateDetails).Replace(";", "").Replace("%", "(?!%).*");
             //对处理完的数据按换行分割成数组
             string[] sArray = str.Split(new char[2] { '\r', '\n' });
             //去除数组中多余的空值
@@ -142,7 +167,7 @@ namespace FileCompare
             //文件夹
             foreach (var item in tvchecked)
             {
-                string directory = FileSystemEntriesHelper.GetFileSystemEntries(TextBoxComparePath.Text.Trim(), item, -1, false)[0];
+                string directory = FileSystemEntriesHelper.GetFileSystemEntries(TextBoxComparePath.Text.Trim(), HandleEscaping(item), -1, false)[0];
                 //需要展示目录不注释下面一行，补齐
                 //result += no++ + "行：" + directory + "\r\n";
 
@@ -181,7 +206,8 @@ namespace FileCompare
                 {
                     foreach (var itemnomatch in noMatchs)
                     {
-                        RichTextBoxCompareResult.Text += "缺少：" + strArr[itemnomatch].Replace("(?!%).*", "%").Replace("\\\\", "\\") + "\r\n";
+                        //RichTextBoxCompareResult.Text += "缺少：" + strArr[itemnomatch].Replace("(?!%).*", "%").Replace("\\\\", "\\") + "\r\n";
+                        RichTextBoxCompareResult.Text += "缺少：" + HandleEscapingBack(strArr[itemnomatch].Replace("(?!%).*", "%")) + "\r\n";
                     }
                 }
 
@@ -199,7 +225,9 @@ namespace FileCompare
             //取所选模板
             //MessageBox.Show(templateDetails);
             //所选模板详情中去掉结尾分号，%替换为正则模糊搜索
-            string str = templateDetails.Replace(";", "").Replace("%", "(?!%).*").Replace("\\", "\\\\");
+            //string str = templateDetails.Replace(";", "").Replace("%", "(?!%).*").Replace("\\", "\\\\");
+            //对正则特殊字符转义
+            string str = HandleEscaping(templateDetails).Replace(";", "").Replace("%", "(?!%).*");
             //对处理完的数据按换行分割成数组
             string[] sArray = str.Split(new char[2] { '\r', '\n' });
             //去除数组中多余的空值
@@ -255,7 +283,7 @@ namespace FileCompare
                 //文件夹
                 foreach (var item in tvchecked)
                 {
-                    string directory = FileSystemEntriesHelper.GetFileSystemEntries(TextBoxComparePath.Text.Trim(), item, -1, false)[0];
+                    string directory = FileSystemEntriesHelper.GetFileSystemEntries(TextBoxComparePath.Text.Trim(), HandleEscaping(item), -1, false)[0];
                     //需要展示目录不注释下面一行，补齐
                     //result += no++ + "行：" + directory + "\r\n";
 
@@ -294,7 +322,8 @@ namespace FileCompare
                     {
                         foreach (var itemnomatch in noMatchs)
                         {
-                            RichTextBoxCompareResult.Text += "缺少：" + strArr[itemnomatch].Replace("(?!%).*", "%").Replace("\\\\", "\\") + "\r\n";
+                            //RichTextBoxCompareResult.Text += "缺少：" + strArr[itemnomatch].Replace("(?!%).*", "%").Replace("\\\\", "\\") + "\r\n";
+                            RichTextBoxCompareResult.Text += "缺少：" + HandleEscapingBack(strArr[itemnomatch].Replace("(?!%).*", "%")) + "\r\n";
                         }
                     }
 
@@ -328,7 +357,7 @@ namespace FileCompare
                     //文件夹
                     foreach (var item in tvchecked)
                     {
-                        string directory = FileSystemEntriesHelper.GetFileSystemEntries(TextBoxComparePath.Text.Trim(), item, -1, false)[0];
+                        string directory = FileSystemEntriesHelper.GetFileSystemEntries(TextBoxComparePath.Text.Trim(), HandleEscaping(item), -1, false)[0];
                         //需要展示目录不注释下面一行，补齐
                         //result += no++ + "行：" + directory + "\r\n";
 
@@ -367,7 +396,8 @@ namespace FileCompare
                         {
                             foreach (var itemnomatch in noMatchs)
                             {
-                                RichTextBoxCompareResult.Text += "缺少：" + strArr[itemnomatch].Replace("(?!%).*", "%").Replace("\\\\", "\\") + "\r\n";
+                                //RichTextBoxCompareResult.Text += "缺少：" + strArr[itemnomatch].Replace("(?!%).*", "%").Replace("\\\\", "\\") + "\r\n";
+                                RichTextBoxCompareResult.Text += "缺少：" + HandleEscapingBack(strArr[itemnomatch].Replace("(?!%).*", "%")) + "\r\n";
                             }
                         }
 
@@ -397,6 +427,8 @@ namespace FileCompare
             */
             #endregion
 
+            UpdateLastCompareFolder();
+
         }
 
         #region 重新绑定 比对目录 数据
@@ -410,8 +442,48 @@ namespace FileCompare
                 TVCompareFolder.Nodes[0].Nodes.Add(list[list.Count - 1]);
             }
             TVCompareFolder.ExpandAll();
+            TVSetLastChecked();
         }
         #endregion
+
+        private void TVSetLastChecked()
+        {
+            foreach (var lastcomparefolder in DefaultConfig.GetappSettingsSplitBySemicolon("LastCompareFolder", ';'))
+            {
+                for (int i = 0; i < TVCompareFolder.Nodes[0].Nodes.Count; i++)
+                {
+                    if (TVCompareFolder.Nodes[0].Nodes[i].Text == lastcomparefolder)
+                    {
+                        TVCompareFolder.Nodes[0].Nodes[i].Checked = true;
+                    }
+                }
+            }
+
+
+
+            int num = 0;
+
+            if (TVCompareFolder.Parent != null)
+            {
+                foreach (TreeNode node in TVCompareFolder.Nodes[0].Nodes)
+                {
+                    //此处为所有子节点选中时才选中父节点
+                    if (node.Checked)
+                    {
+                        num++;
+                    }
+                    else
+                    {
+                        num--;
+                    }
+                    if (num == TVCompareFolder.Nodes[0].Nodes.Count)
+                    {
+                        TVCompareFolder.Nodes[0].Checked = true;
+                        break;
+                    }
+                }
+            }
+        }
 
         #region 复制到剪切板按钮
         private void BtnCopyToClipboard_Click(object sender, EventArgs e)
@@ -495,12 +567,157 @@ namespace FileCompare
         }
         #endregion
 
-        private void button1_Click(object sender, EventArgs e)
+        private string HandleEscaping(string str)
+        {
+            return str
+                .Replace(@"\", @"\\")
+                .Replace(@"$", @"\$")
+                .Replace(@"(", @"\(")
+                .Replace(@")", @"\)")
+                .Replace(@"*", @"\*")
+                .Replace(@"+", @"\+")
+                .Replace(@".", @"\.")
+                .Replace(@"[", @"\[")
+                .Replace(@"?", @"\?")
+                .Replace(@"^", @"\^")
+                .Replace(@"{", @"\{")
+                .Replace(@"|", @"\|");
+        }
+
+        private string HandleEscapingBack(string str)
+        {
+            return str
+                .Replace(@"\$", @"$")
+                .Replace(@"\(", @"(")
+                .Replace(@"\)", @")")
+                .Replace(@"\*", @"*")
+                .Replace(@"\+", @"+")
+                .Replace(@"\.", @".")
+                .Replace(@"\[", @"[")
+                .Replace(@"\?", @"?")
+                .Replace(@"\^", @"^")
+                .Replace(@"\{", @"{")
+                .Replace(@"\|", @"|")
+                .Replace(@"\\", @"\");
+        }
+
+        private void BtnCompareThread_Click(object sender, EventArgs e)
         {
             Thread threadmatchreg = new Thread(new ThreadStart(GetFileCompareResult));
             threadmatchreg.Start();
             //等待线程执行完毕
             threadmatchreg.Join();
+
+
+            UpdateLastCompareFolder();
+        }
+
+        private void TVCompareFolder_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
+        {
+            //父节点下子节点双击
+            if (e.Node.Level == 1)
+            {
+                System.Diagnostics.Process.Start(TextBoxComparePath.Text.Trim() + @"\" + e.Node.Text);
+            }
+        }
+
+        private bool IsMatch(string path, string regex)
+        {
+            return Regex.IsMatch(path, regex, RegexOptions.IgnoreCase | RegexOptions.Multiline);
+        }
+
+        private void UpdateLastCompareFolder()
+        {
+            List<string> tvchecked = new List<string>();
+
+            //遍历子节点
+            for (int i = 0; i < TVCompareFolder.Nodes[0].Nodes.Count; i++)
+            {
+                //子节点有勾选添加到list
+                if (TVCompareFolder.Nodes[0].Nodes[i].Checked == true)
+                {
+                    tvchecked.Add(TVCompareFolder.Nodes[0].Nodes[i].Text);
+                }
+            }
+
+            DefaultConfig.AddappSettings("LastCompareFolder", string.Join(";", tvchecked.ToArray()));
+
+        }
+
+        private void BtnShowMatchFiles_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void BtnCompareFast_Click(object sender, EventArgs e)
+        {
+            RichTextBoxCompareResult.Text = "";
+            //Regex.IsMatch(Path.GetFileName(item), regexPattern, RegexOptions.IgnoreCase | RegexOptions.Multiline)
+
+
+
+            //RichTextBoxCompareResult.Text = FileSystemEntriesHelper.GetFileSystemEntries(TextBoxComparePath.Text.Trim() + @"\ZAA_TS21002", @"01_开发库\\01_文档区\\03_系统测试\\(?!%).*_ST_系统测试用例.xls(?!%).*", -1, false).Length.ToString();
+
+
+            //所选模板详情中去掉结尾分号，%替换为正则模糊搜索
+            //string str = templateDetails.Replace(";", "").Replace("%", "(?!%).*").Replace("\\", "\\\\");
+            //对正则特殊字符转义
+            string str = HandleEscaping(templateDetails).Replace(";", "").Replace("%", "(?!%).*");
+            //对处理完的数据按换行分割成数组
+            string[] sArray = str.Split(new char[2] { '\r', '\n' });
+            //去除数组中多余的空值
+            var strArr = sArray.Where(s => !string.IsNullOrEmpty(s)).ToArray();
+
+            List<string> tvchecked = new List<string>();
+
+            //遍历子节点
+            for (int i = 0; i < TVCompareFolder.Nodes[0].Nodes.Count; i++)
+            {
+                //子节点有勾选添加到list
+                if (TVCompareFolder.Nodes[0].Nodes[i].Checked == true)
+                {
+                    tvchecked.Add(TVCompareFolder.Nodes[0].Nodes[i].Text);
+                }
+            }
+
+            for (int i = 0; i < tvchecked.Count; i++)
+            {
+                int allmatchs = 0;
+                RichTextBoxCompareResult.Text += "\r\n" + tvchecked[i] + " 比对结果：\r\n";
+                for (int j = 0; j < strArr.Length; j++)
+                {
+
+                    int matchs = 0;
+                    foreach (var item in FileSystemEntriesHelper.GetFiles(TextBoxComparePath.Text.Trim() + @"\" + tvchecked[i], "^(?!\\.).*", -1, false))
+                    {
+                        //RichTextBoxCompareResult.Text += item+"\r\n";
+                        if (IsMatch(item, strArr[j]))
+                        {
+                            matchs++;
+                            allmatchs++;
+                        }
+                    }
+                    if (matchs == 0)
+                    {
+                        RichTextBoxCompareResult.Text += "缺少：" + HandleEscapingBack(strArr[j].Replace("(?!%).*", "%")) + "\r\n";
+
+                        RichTextBoxCompareResult.Focus();//获取焦点
+                        RichTextBoxCompareResult.Select(RichTextBoxCompareResult.TextLength, 0);//光标定位到文本最后
+                        RichTextBoxCompareResult.ScrollToCaret();//滚动到光标处
+                    }
+                }
+                if (allmatchs == strArr.Length)
+                {
+                    RichTextBoxCompareResult.Text += "无文件缺失\r\n";
+                }
+                if (allmatchs > strArr.Length)
+                {
+                    RichTextBoxCompareResult.Text += "匹配文件数量与模板数量不一致\r\n";
+                }
+            }
+
+
+            UpdateLastCompareFolder();
         }
     }
 }

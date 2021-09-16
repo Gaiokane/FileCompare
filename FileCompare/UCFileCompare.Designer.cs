@@ -41,7 +41,9 @@ namespace FileCompare
             this.BtnCopyToClipboard = new System.Windows.Forms.Button();
             this.BtnSaveToFile = new System.Windows.Forms.Button();
             this.RichTextBoxCompareResult = new System.Windows.Forms.RichTextBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.BtnCompareThread = new System.Windows.Forms.Button();
+            this.BtnShowMatchFiles = new System.Windows.Forms.Button();
+            this.BtnCompareFast = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // LabTempletes
@@ -114,6 +116,7 @@ namespace FileCompare
             this.TVCompareFolder.Size = new System.Drawing.Size(190, 356);
             this.TVCompareFolder.TabIndex = 18;
             this.TVCompareFolder.AfterCheck += new System.Windows.Forms.TreeViewEventHandler(this.TVCompareFolder_AfterCheck);
+            this.TVCompareFolder.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.TVCompareFolder_NodeMouseDoubleClick);
             // 
             // LabCompareResult
             // 
@@ -152,21 +155,43 @@ namespace FileCompare
             this.RichTextBoxCompareResult.TabIndex = 22;
             this.RichTextBoxCompareResult.Text = "";
             // 
-            // button1
+            // BtnCompareThread
             // 
-            this.button1.Location = new System.Drawing.Point(687, 34);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(97, 23);
-            this.button1.TabIndex = 23;
-            this.button1.Text = "多线程开始比对";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.BtnCompareThread.Location = new System.Drawing.Point(687, 34);
+            this.BtnCompareThread.Name = "BtnCompareThread";
+            this.BtnCompareThread.Size = new System.Drawing.Size(97, 23);
+            this.BtnCompareThread.TabIndex = 23;
+            this.BtnCompareThread.Text = "多线程开始比对";
+            this.BtnCompareThread.UseVisualStyleBackColor = true;
+            this.BtnCompareThread.Click += new System.EventHandler(this.BtnCompareThread_Click);
+            // 
+            // BtnShowMatchFiles
+            // 
+            this.BtnShowMatchFiles.Location = new System.Drawing.Point(454, 34);
+            this.BtnShowMatchFiles.Name = "BtnShowMatchFiles";
+            this.BtnShowMatchFiles.Size = new System.Drawing.Size(123, 23);
+            this.BtnShowMatchFiles.TabIndex = 24;
+            this.BtnShowMatchFiles.Text = "显示匹配模板的文件";
+            this.BtnShowMatchFiles.UseVisualStyleBackColor = true;
+            this.BtnShowMatchFiles.Click += new System.EventHandler(this.BtnShowMatchFiles_Click);
+            // 
+            // BtnCompareFast
+            // 
+            this.BtnCompareFast.Location = new System.Drawing.Point(606, 34);
+            this.BtnCompareFast.Name = "BtnCompareFast";
+            this.BtnCompareFast.Size = new System.Drawing.Size(75, 23);
+            this.BtnCompareFast.TabIndex = 25;
+            this.BtnCompareFast.Text = "快速比对";
+            this.BtnCompareFast.UseVisualStyleBackColor = true;
+            this.BtnCompareFast.Click += new System.EventHandler(this.BtnCompareFast_Click);
             // 
             // UCFileCompare
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.BtnCompareFast);
+            this.Controls.Add(this.BtnShowMatchFiles);
+            this.Controls.Add(this.BtnCompareThread);
             this.Controls.Add(this.RichTextBoxCompareResult);
             this.Controls.Add(this.BtnSaveToFile);
             this.Controls.Add(this.BtnCopyToClipboard);
@@ -201,6 +226,8 @@ namespace FileCompare
         private System.Windows.Forms.Button BtnCopyToClipboard;
         private System.Windows.Forms.Button BtnSaveToFile;
         private System.Windows.Forms.RichTextBox RichTextBoxCompareResult;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button BtnCompareThread;
+        private System.Windows.Forms.Button BtnShowMatchFiles;
+        private System.Windows.Forms.Button BtnCompareFast;
     }
 }

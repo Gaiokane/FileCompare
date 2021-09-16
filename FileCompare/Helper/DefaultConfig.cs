@@ -13,6 +13,10 @@ namespace FileCompare.Helper
         public static string DefaultFormText;
         //默认文件夹路径
         public static string DefaultFloaderPath;
+        //是否显示测试按钮
+        public static string ShowTest;
+        //上次勾选的比对目录
+        public static string LastCompareFolder;
 
         //配置文件路径
         public static string CONFIGPATH = "./FileCompare.exe";
@@ -37,6 +41,8 @@ namespace FileCompare.Helper
         {
             DefaultFormText = ConfigHelper.GetappSettings("DefaultFormText", CONFIGPATH);
             DefaultFloaderPath = ConfigHelper.GetappSettings("DefaultFloaderPath", CONFIGPATH);
+            ShowTest = ConfigHelper.GetappSettings("ShowTest", CONFIGPATH);
+            LastCompareFolder = ConfigHelper.GetappSettings("LastCompareFolder", CONFIGPATH);
         }
         #endregion
 
@@ -54,6 +60,14 @@ namespace FileCompare.Helper
             {
                 //AddappSettings("DefaultFloaderPath", @"E:\testfloader");
                 ConfigHelper.AddappSettings("DefaultFloaderPath", Environment.CurrentDirectory, CONFIGPATH);
+            }
+            if (string.IsNullOrEmpty(ShowTest))
+            {
+                ConfigHelper.AddappSettings("ShowTest", @"0", CONFIGPATH);
+            }
+            if (string.IsNullOrEmpty(LastCompareFolder))
+            {
+                ConfigHelper.AddappSettings("LastCompareFolder", @"", CONFIGPATH);
             }
         }
         #endregion
