@@ -116,10 +116,10 @@ namespace FileCompare
             this.LabNotic.AutoSize = true;
             this.LabNotic.Location = new System.Drawing.Point(15, 36);
             this.LabNotic.Name = "LabNotic";
-            this.LabNotic.Size = new System.Drawing.Size(413, 48);
+            this.LabNotic.Size = new System.Drawing.Size(377, 48);
             this.LabNotic.TabIndex = 7;
-            this.LabNotic.Text = "路径中文件夹或文件中以\\分隔，最后一项需为文件名\r\n文件夹名或文件名左/右“%”代表模糊搜索（仅能在文件夹名和文件名左右）\r\n每行结尾需以;结尾\r\n如“编号_%\\" +
-    "01_aa库\\01_bb区\\03_cc\\%_dd.xls%;”";
+            this.LabNotic.Text = "路径中文件夹或文件之间以\\分隔，最后一项需为文件名\r\n文件夹名或文件名中的“%”代表模糊搜索\r\n每行需以;结尾\r\n如“01_开发库\\01_文档区\\03_系统测试\\" +
+    "%_ST_系统测试%报告.doc%;”";
             // 
             // LabTempleteName
             // 
